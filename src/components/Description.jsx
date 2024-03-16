@@ -1,16 +1,9 @@
+/* eslint-disable react/prop-types */
 import Counter from './buy-components/Counter'
 import BuyButton from './buy-components/BuyButton'
-import { useState } from 'react'
 
 export default function Description(props){
 
-    const [count, setCount] = useState(0)
-    
-    function changeCount(event){
-        event.target.id === 'plus' ? setCount(prevCount => prevCount + 1) :
-        event.target.id === 'minus' ? setCount(prevCount => prevCount >= 1 ? prevCount - 1 : prevCount) :
-        count
-    }
 
     return (
         <div className="description">
@@ -27,12 +20,16 @@ export default function Description(props){
                 <p className="prev-price">$250.00</p>
             </div>
             <div className="buy-btns">
-                <Counter handleClick={changeCount} count={count}/>
+                <Counter 
+                changeCount={props.changeCount}
+                count={props.count}
+                />
                 <BuyButton 
-                itemsQuantity={count}
-                // itemTitle={}
-                addItems={props.addItems}/>
+                itemsQuantity={props.count}
+                addItems={props.addItems}
+                />
             </div>
         </div>
     )    
 }
+
