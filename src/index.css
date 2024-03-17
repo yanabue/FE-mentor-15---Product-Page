@@ -327,32 +327,10 @@ a:hover {
   height: 500px;
 }
 
-.right-arrow,
-.left-arrow,
 .close {
-  /* position: absolute;
-  z-index: 300;
-  top: 42%;
-  background-color: var(--White);
-  border-radius: 50%;
-  width: 50px;
-  height: 50px;
-  right: 63%;
-  display: flex;
-  justify-content: center;
-  align-items: center; */
-  position: relative;
-  left: 5px;
-  top: -50%;
-}
-
-.right-arrow {
-  right: 34%;
-}
-
-.close {
+  position: absolute;
   top: 10%;
-  right: 35%;
+  left: 63%;
   background-color: transparent;
 }
 
@@ -362,11 +340,6 @@ a:hover {
 
 .close:hover path {
   fill: var(--Orange);
-}
-
-.right-arrow:hover path,
-.left-arrow:hover path {
-  stroke: var(--Orange);
 }
 
 .mobile-menu-btn {
@@ -396,11 +369,35 @@ a:hover {
 .mobile-links a:hover {
   border: none;
   padding: 0px;
+  color: var(--Grayish-Blue)
 }
 
 .close-mobile-menu {
   position: absolute;
   top: 35px;
+}
+
+.left-arrow-mobile,
+.right-arrow-mobile {
+  position: absolute;
+  top: 42%;
+  background-color: var(--White);
+  padding: 15px 18px;
+  border-radius: 50%;
+  left: 34%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.right-arrow-mobile {
+  left: unset;
+  right: 34%;
+}
+
+.right-arrow-mobile:hover path,
+.left-arrow-mobile:hover path{
+  stroke: var(--Orange);
 }
 
 @media (max-width: 1300px) {
@@ -410,6 +407,19 @@ a:hover {
 
   .main {
     margin-top: 50px;
+  }
+
+  .right-arrow-mobile{
+    right: 32%;
+  }
+
+  .left-arrow-mobile{
+    left: 32%;
+  }
+
+  .close{
+    top: 12%;
+    left: 64%;
   }
 }
 
@@ -430,6 +440,11 @@ a:hover {
   .cart-content{
     right: 40px;
   }
+
+  .close{
+    top: 14%;
+    left: 66%;
+  }
 }
 
 @media (max-width: 1000px) {
@@ -439,6 +454,14 @@ a:hover {
 
   .main-img {
     height: 350px;
+  }
+
+  .left-arrow-mobile{
+    left: 30%;
+  }
+
+  .right-arrow-mobile{
+    right: 30%;
   }
 }
 

@@ -27,6 +27,7 @@ function App() {
   const [cartItems, setCartItems] = useState([]);
 
   function addItems() {
+    if (count > 0){
     setCartItems((prevItemsList) => {
       return [
         ...prevItemsList,
@@ -38,6 +39,7 @@ function App() {
         },
       ];
     });
+  }
   }
 
   function deleteItem(itemId) {
@@ -59,6 +61,34 @@ function App() {
     setWindowWidth(window.innerWidth);
   });
 
+  const imageUrls = [
+    "images/image-product-1.jpg",
+    "images/image-product-2.jpg",
+    "images/image-product-3.jpg",
+    "images/image-product-4.jpg",
+  ];
+
+    const [imgIndex, setImgIndex] = useState(0)
+    const [mainImgUrl, setMainImgUrl] = useState(imageUrls[imgIndex]);
+  
+    function changeMain(index) {
+      setMainImgUrl(imageUrls[index]);
+    }
+    
+    function moveImg(direction){
+      if (direction === 'right'){
+          setImgIndex(prevImgIndex => {
+              return prevImgIndex === 3 ? 0 : prevImgIndex + 1
+          })
+          setMainImgUrl(imageUrls[imgIndex])
+      } else if (direction === 'left'){
+          setImgIndex(prevImgIndex => {
+              return prevImgIndex === 0 ? 3 : prevImgIndex - 1
+          })
+          setMainImgUrl(imageUrls[imgIndex])
+      }
+  }
+
   return (
     <>
       <header className="header">
@@ -74,15 +104,15 @@ function App() {
         />
       </header>
       <main className="main">
-        <div
+        {windowWidth > 850 && <div
           className="modal"
           style={{ display: isLightboxOpen }}
           onClick={toggleLightbox}
         >
-          <Gallery className="lightbox" isLightbox={isLightboxOpen} />
-        </div>
-        {windowWidth > 850 && <Gallery toggleLightbox={toggleLightbox} />}
-        {windowWidth <= 850 && <MobileGallery />}
+          <Gallery className="lightbox" isLightbox={isLightboxOpen} closeLightbox={toggleLightbox} moveImg={moveImg} changeMain={changeMain} imageUrls={imageUrls} imgIndex={imgIndex} mainImgUrl={mainImgUrl}/>
+        </div>}
+        {windowWidth > 850 && <Gallery toggleLightbox={toggleLightbox} changeMain={changeMain} imageUrls={imageUrls} imgIndex={imgIndex} mainImgUrl={mainImgUrl}/>}
+        {windowWidth <= 850 && <MobileGallery mainImgUrl={mainImgUrl} moveImg={moveImg}/>}
         <Description
           count={count}
           addItems={addItems}
