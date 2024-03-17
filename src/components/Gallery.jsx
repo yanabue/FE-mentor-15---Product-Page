@@ -11,7 +11,7 @@ export default function Gallery(props) {
         'images/image-product-4.jpg'
     ]
 
-    function changeMain(index, event){
+    function changeMain(index){
         
 
         setMainImgUrl(imageUrls[index])

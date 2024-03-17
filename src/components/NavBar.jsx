@@ -5,11 +5,7 @@ import MobileLinks from "./nav-components/MobileLinks";
 import { useState } from "react";
 
 export default function NavBar(props) {
-  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
-  window.addEventListener("resize", () => {
-    setWindowWidth(window.innerWidth);
-  });
-
+ 
   const [isMobileMenu, setMobileMenu] = useState(false);
 
   function toggleMobileMenu() {
@@ -18,13 +14,13 @@ export default function NavBar(props) {
 
   return (
     <nav className="nav-bar">
-      {windowWidth <= 850 && isMobileMenu ? (
+      {props.windowWidth <= 850 && isMobileMenu ? (
         <MobileLinks handleClick={toggleMobileMenu} />
       ) : (
         <></>
       )}
       <div className="nav-left">
-        {windowWidth <= 850 && (
+        {props.windowWidth <= 850 && (
           <button className="mobile-menu-btn" onClick={toggleMobileMenu}>
             <img
               src="images\icon-menu.svg"
@@ -34,7 +30,7 @@ export default function NavBar(props) {
           </button>
         )}
         <img src="images\logo.svg" className="nav-logo" />
-        {windowWidth > 850 && <Links />}
+        {props.windowWidth > 850 && <Links />}
       </div>
       <div className="nav-right">
         <button className="cart-icon-btn" onClick={props.handleClick}>

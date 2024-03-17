@@ -3,6 +3,7 @@ import NavBar from "./components/NavBar";
 import Gallery from "./components/Gallery";
 import Description from "./components/Description";
 import ShoppingCart from "./components/nav-components/ShoppingCart";
+import MobileGallery from "./components/mobile-components/MobileGallery";
 
 function App() {
   const [count, setCount] = useState(0);
@@ -45,7 +46,7 @@ function App() {
     });
   }
 
-  const [isLightboxOpen, setIsLighbox] = useState('none');
+  const [isLightboxOpen, setIsLighbox] = useState("none");
 
   function toggleLightbox() {
     setIsLighbox((prevLightboxDisplay) => {
@@ -53,10 +54,19 @@ function App() {
     });
   }
 
+  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+  window.addEventListener("resize", () => {
+    setWindowWidth(window.innerWidth);
+  });
+
   return (
     <>
       <header className="header">
-        <NavBar handleClick={openCart} itemsLength={cartItems.length} />
+        <NavBar 
+        handleClick={openCart}
+        itemsLength={cartItems.length}
+        windowWidth={windowWidth}
+        />
         <ShoppingCart
           isOpen={cartDisplay}
           cartContent={cartItems}
@@ -64,13 +74,15 @@ function App() {
         />
       </header>
       <main className="main">
-        <div className="modal" style={{display: isLightboxOpen}} onClick={toggleLightbox}>
-          <Gallery 
-          className="lightbox"
-          isLightbox={isLightboxOpen}
-          />
+        <div
+          className="modal"
+          style={{ display: isLightboxOpen }}
+          onClick={toggleLightbox}
+        >
+          <Gallery className="lightbox" isLightbox={isLightboxOpen} />
         </div>
-        <Gallery toggleLightbox={toggleLightbox} />
+        {windowWidth > 850 && <Gallery toggleLightbox={toggleLightbox} />}
+        {windowWidth <= 850 && <MobileGallery />}
         <Description
           count={count}
           addItems={addItems}
